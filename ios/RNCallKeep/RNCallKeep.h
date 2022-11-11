@@ -11,13 +11,24 @@
 #import <CallKit/CallKit.h>
 #import <Intents/Intents.h>
 //#import <AVFoundation/AVAudioSession.h>
-
 #import <React/RCTEventEmitter.h>
+
+
+
+@protocol StatusWheelDelegate <NSObject>
+
+- (void) answeredCall;
+
+@end //end @protocol OnScreenDelegate
+
+
 
 @interface RNCallKeep : RCTEventEmitter <CXProviderDelegate>
 
 @property (nonatomic, strong) CXCallController *callKeepCallController;
 @property (nonatomic, strong) CXProvider *callKeepProvider;
+
+
 
 + (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
@@ -46,5 +57,12 @@ continueUserActivity:(NSUserActivity *)userActivity
 + (BOOL)isCallActive:(NSString *)uuidString;
 
 + (void)setup:(NSDictionary *)options;
+
+//Test Deletegate
+
+- (void)testingDeletegate;
+
+@property (nonatomic, weak) id <StatusWheelDelegate> delegate;
+
 
 @end
